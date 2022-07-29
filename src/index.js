@@ -1,13 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+
+import { HashRouter, Routes, Route } from 'react-router-dom'; 
+import Register from './pages/Register';
+import Login from './pages/Login';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <HashRouter>
+      <Routes>
+        <Route path='' element={<div>Index</div>} />
+        <Route path='/register' element={ <div className='grid place-items-center h-[100vh] px-2'><Register/></div> }/>
+        <Route path='/login' element={ <div className='grid place-items-center h-[100vh] px-2'><Login/></div> }/>
+      </Routes>
+    </HashRouter>
+    
   </React.StrictMode>
 );
 
