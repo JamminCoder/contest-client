@@ -3,7 +3,7 @@ import Form from '../components/Form';
 
 export default function Login(props) {
     return (
-        <Form method="POST" action="/login">
+        <Form method="POST" action="http://localhost:8000/login">
             <h1 className="text-3xl">Login</h1>
             <div className="my-5">
                 <div className="mb-4">

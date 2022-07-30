@@ -1,7 +1,7 @@
 import Form from '../components/Form';
 export default function Register(props) {
     return (
-        <Form action="/register" method='POST'>
+        <Form action="http://localhost:8000/register" method='POST'>
             <h1 className="text-3xl">Register</h1>
             <div className="my-5">
                 <div className="mb-4">
@@ -15,8 +15,8 @@ export default function Register(props) {
                 </div>
 
                 <div className="mb-4">
-                    <label for="conf_password">Confirm Password</label><br/>
-                    <input type="password" name="conf_password" id="conf_password"/>
+                    <label for="confPassword">Confirm Password</label><br/>
+                    <input type="password" name="confPassword" id="confPassword"/>
                 </div>
             </div>
             
