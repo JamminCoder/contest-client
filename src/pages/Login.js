@@ -1,11 +1,19 @@
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Form from '../components/Form';
+import setCookie from '../cookies';
 const axios = require('axios').default;
 
 
 export default function Login(props) {
+    const [message, setMessage] = useState({ color: null, text: "" });
+
     return (
         <Form method="POST" action="http://localhost:8000/login">
             <h1 className="text-3xl">Login</h1>
+
+            <p className='text-center mt-2 h-3' style={{ color: message.color }}>{ message.text }</p>
+
             <div className="my-5">
                 <div className="mb-4">
                     <label htmlFor="username">Username</label><br/>
@@ -16,6 +24,7 @@ export default function Login(props) {
                     <label htmlFor="password">Password</label><br/>
                     <input type="password" name="password" id="password"/>
                 </div>
+
             </div>
             
             <button onClick={ (e) => {
@@ -23,22 +32,23 @@ export default function Login(props) {
 
                 const password = document.querySelector("#password").value;
                 const username = document.querySelector("#username").value;
-                console.log("Password: " + password);
-                console.log("Username: " + username);
 
                 axios.post("http://localhost:8000/login", 
                     {username: username, password: password}
                 ).then(res => {
                     if (res.data.jwt) {
-                        console.log("JWT is " + res.data.jwt);
-                        document.cookie = `jwt=${ res.data.jwt }; SameSite=None; Secure`;
+                        setMessage({ color: "green", text: "Logging you in..." });
+                        setCookie("jwt", res.data.jwt, 7);
                     } else {
-                        console.log("Incorrect username or password!");
+                        setMessage({ color: "red", text: res.data });
                     }
                     
                 })
 
             } } className="border border-gray-500 px-2 py-1 rounded">Login</button>
+
+            <p className='mt-5'>Don't have an account? <Link to='/register' className='text-blue-600'>Create one.</Link></p>
+
         </Form>
     );
 }
