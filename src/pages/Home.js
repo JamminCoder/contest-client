@@ -1,13 +1,11 @@
-import { isLoggedIn } from '../cookies';
-import { useEffect, useState } from 'react';
+import { isAuthorized } from '../auth';
+const axios = require('axios').default;
 
 export default function Home(props) {
-
     return (
         <div className='Home min-h-[90vh]'>
-            <p>Logged in status: {`${ isLoggedIn() }`} </p>
+            <p>Logged in status: {`${ isAuthorized() }`} </p>
             home!
-            
             
         </div>
     );

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { isLoggedIn } from '../cookies';
+import { isAuthorized } from '../auth';
 import Logout from './Logout';
 
 export default function Navbar(props) {
@@ -7,8 +7,8 @@ export default function Navbar(props) {
     return (
         <nav className="p-6 flex gap-3 shadow-md">
             <Link to='/'>Home</Link>
-            {!isLoggedIn() ? <Link to='/register'>Register</Link>: ""}
-            {isLoggedIn() ? <Logout to='/'/>: <Link to='/login'>Login</Link>}
+            {!isAuthorized() ? <Link to='/register'>Register</Link>: ""}
+            {isAuthorized() ? <Logout to='/'/>: <Link to='/login'>Login</Link>}
         </nav>
     );
 }

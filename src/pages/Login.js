@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Form from '../components/Form';
-import setCookie from '../cookies';
 const axios = require('axios').default;
 
 
@@ -39,7 +38,7 @@ export default function Login(props) {
                 ).then(res => {
                     if (res.data.jwt) {
                         setMessage({ color: "green", text: "Logging you in..." });
-                        setCookie("jwt", res.data.jwt, 7);
+                        localStorage.setItem("jwt", res.data.jwt);
                         navigate("/");
                         window.location.reload();
                     } else {
