@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Form from '../components/Form';
 import setCookie from '../cookies';
 const axios = require('axios').default;
@@ -8,6 +8,7 @@ const axios = require('axios').default;
 
 export default function Register(props) {
     const [message, setMessage] = useState({ color: null, text: "" });
+    const navigate = useNavigate();
 
     return (
         <Form action="http://localhost:8000/register" method='POST'>
@@ -45,6 +46,9 @@ export default function Register(props) {
                     if (res.data.jwt) {
                         setMessage({ color: "green", text: "Creating your account :)" });
                         setCookie("jwt", res.data.jwt, 7);
+                        navigate('/');
+                        window.location.reload();
+                        
                     } else {
                         setMessage({ color: "red", text: res.data });
                     }

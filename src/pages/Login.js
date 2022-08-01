@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Form from '../components/Form';
 import setCookie from '../cookies';
 const axios = require('axios').default;
@@ -7,6 +7,7 @@ const axios = require('axios').default;
 
 export default function Login(props) {
     const [message, setMessage] = useState({ color: null, text: "" });
+    const navigate = useNavigate();
 
     return (
         <Form method="POST" action="http://localhost:8000/login">
@@ -39,6 +40,8 @@ export default function Login(props) {
                     if (res.data.jwt) {
                         setMessage({ color: "green", text: "Logging you in..." });
                         setCookie("jwt", res.data.jwt, 7);
+                        navigate("/");
+                        window.location.reload();
                     } else {
                         setMessage({ color: "red", text: res.data });
                     }
