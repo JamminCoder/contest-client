@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
-import { HashRouter, Routes, Route } from 'react-router-dom'; 
+import { HashRouter, Routes, Route, useLocation } from 'react-router-dom'; 
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Home from './pages/Home';
 import Navbar from './components/Navbar';
+import Contest from "./pages/Contest";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -19,6 +20,8 @@ root.render(
         <Route path='' element={ <Home/> } />
         <Route path='/register' element={ <div className='grid place-items-center h-[90vh] px-2'><Register/></div> }/>
         <Route path='/login' element={ <div className='grid place-items-center h-[90vh] px-2'><Login/></div> }/>
+        <Route path='/contests/new' element={ <div>Create New Contest</div>}/>
+        <Route path='/contests/:contestID' element={ <Contest/> }/>
       </Routes>
     </HashRouter>
     
