@@ -9,7 +9,7 @@ export default function Login(props) {
     const navigate = useNavigate();
     const action = props.action || "http://localhost:8000/login";
 
-    function loginCallback(e) {
+    function onSubmit(e) {
         e.preventDefault();
 
         const password = document.querySelector("#password").value;
@@ -36,7 +36,7 @@ export default function Login(props) {
     }
 
     return (
-        <Form id="loginForm" method="POST" action={ action } onSubmit={ (e) => loginCallback(e) }>
+        <Form id="loginForm" method="POST" action={ action } onSubmit={ (e) => onSubmit(e) }>
             <h1 className="text-3xl">Login</h1>
 
             <p className='text-center mt-2 h-3' style={{ color: message.color }}>{ message.text }</p>
