@@ -7,9 +7,36 @@ const axios = require('axios').default;
 export default function Login(props) {
     const [message, setMessage] = useState({ color: null, text: "" });
     const navigate = useNavigate();
+    const action = props.action || "http://localhost:8000/login";
+
+    function loginCallback(e) {
+        e.preventDefault();
+
+        const password = document.querySelector("#password").value;
+        const username = document.querySelector("#username").value;
+        
+        // Submit POST request to login-endpoint. 
+        // On success, store JWT in localStorage
+        // On fail display error message
+        axios.post(action, {username: username, password: password})
+            .then(res => {
+            if (res.data.jwt) {
+                // Server returned a JWT, that means the login was successful.
+                setMessage({ color: "green", text: "Logging you in..." });
+                localStorage.setItem("jwt", res.data.jwt);
+                navigate("/");
+                window.location.reload();
+                
+            } else {
+                // No JWT in response, display the response error message.
+                setMessage({ color: "red", text: res.data });
+            }
+            
+        })
+    }
 
     return (
-        <Form method="POST" action="http://localhost:8000/login">
+        <Form id="loginForm" method="POST" action={ action } onSubmit={ (e) => loginCallback(e) }>
             <h1 className="text-3xl">Login</h1>
 
             <p className='text-center mt-2 h-3' style={{ color: message.color }}>{ message.text }</p>
@@ -27,27 +54,7 @@ export default function Login(props) {
 
             </div>
             
-            <button onClick={ (e) => {
-                e.preventDefault();
-
-                const password = document.querySelector("#password").value;
-                const username = document.querySelector("#username").value;
-
-                axios.post("http://localhost:8000/login", 
-                    {username: username, password: password}
-                ).then(res => {
-                    if (res.data.jwt) {
-                        setMessage({ color: "green", text: "Logging you in..." });
-                        localStorage.setItem("jwt", res.data.jwt);
-                        navigate("/");
-                        window.location.reload();
-                    } else {
-                        setMessage({ color: "red", text: res.data });
-                    }
-                    
-                })
-
-            } } className="border border-gray-500 px-2 py-1 rounded">Login</button>
+            <button className="border border-gray-500 px-2 py-1 rounded">Login</button>
 
             <p className='mt-5'>Don't have an account? <Link to='/register' className='text-blue-600'>Create one.</Link></p>
 
