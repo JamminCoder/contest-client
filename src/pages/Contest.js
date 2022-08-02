@@ -10,10 +10,10 @@ export default function Contest(props) {
 
             <div className="Contenders w-[80%] grid [grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr))]">
                 <Contender username="Tim" />
-                <Contender username="tim" />
-                <Contender username="tim" />
-                <Contender username="tim" />
-                <Contender username="tim" />
+                <Contender username="Timmers" />
+                <Contender username="Timothy" />
+                <Contender username="Wimp" />
+                <Contender username="Shrimp" />
             </div>
         </div>
     );
