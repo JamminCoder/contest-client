@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import Home from './pages/Home';
 import Navbar from './components/Navbar';
 import Contest from "./pages/Contest";
+import NewContest from "./pages/NewContest";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -20,7 +21,7 @@ root.render(
         <Route path='' element={ <Home/> } />
         <Route path='/register' element={ <div className='grid place-items-center h-[90vh] px-2'><Register/></div> }/>
         <Route path='/login' element={ <div className='grid place-items-center h-[90vh] px-2'><Login/></div> }/>
-        <Route path='/contests/new' element={ <div>Create New Contest</div>}/>
+        <Route path='/contests/new' element={ <NewContest/> }/>
         <Route path='/contests/:contestID' element={ <Contest/> }/>
       </Routes>
     </HashRouter>
