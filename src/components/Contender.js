@@ -10,7 +10,7 @@ export function PointButton(props) {
 
 
 
-export default function Contender({ username, points }) {
+export default function Contender({ username, points, pointType }) {
     const contestID = useParams().contestID;
     const [updatedPoints, setPoints] = useState(points);
 
@@ -41,7 +41,7 @@ export default function Contender({ username, points }) {
                 <PointButton onClick={ () => addPoints(5) }>+</PointButton>
             </div>
 
-            <p className="text-xl mt-2">Points: { updatedPoints }</p>
+            <p className="text-xl mt-2">{ pointType }: { updatedPoints }</p>
         </div>
     );
 }

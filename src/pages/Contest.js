@@ -22,7 +22,7 @@ export default function Contest(props) {
 
             <div className="Contenders w-[100%] flex gap-5 items-center flex-col">
                 { contest.contenders ? contest.contenders.map(contender => {
-                    return <Contender key={ contender.contender } username={ contender.contender } points={ contender.points } />
+                    return <Contender key={ contender.contender } username={ contender.contender } points={ contender.points } pointType={ contest.pointType }/>
                 }): "No contenders" }
             </div>
 
