@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate, Link, useParams } from "react-router-dom";
 import CenterPage from "../components/CenterPage";
 import Form from "../components/Form";
+import { authHeader } from "../auth";
 const axios = require("axios").default;
 
 
@@ -16,13 +17,13 @@ export default function NewContender(props) {
 
         const contender = document.querySelector("#contender").value;
         const points = document.querySelector("#points").value;
-        const headers = {
+        const data = {
             contender: contender,
             points: points,
             contestID: contestID
         };
 
-        axios.post(action, headers)
+        axios.post(action, data, {headers: { ...authHeader() }})
             .then(res => {
             if (res.data.ok) {
                 navigate("/");
