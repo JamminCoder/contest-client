@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Contender from "../components/Contender";
+import IfAuth from "../components/IfAuth";
 const axios = require("axios").default;
 
 export default function Contest(props) {
@@ -18,7 +19,9 @@ export default function Contest(props) {
     return (
         <div className="Contest flex gap-5 items-center flex-col">
             <h1 className="text-5xl m-5 text-center">{ contest.contestName }</h1>
-            <Link to={`/contests/${ contest.contestID }/new_contender`}>New Contender</Link>
+            <IfAuth>
+                <Link className="text-blue-500"  to={`/contests/${ contest.contestID }/new_contender`}>New Contender</Link>
+            </IfAuth>
 
             <div className="Contenders w-[100%] flex gap-5 items-center flex-col">
                 { contest.contenders ? contest.contenders.map(contender => {
