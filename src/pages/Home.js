@@ -1,5 +1,5 @@
-import ContestListing from "../components/ContestListing";
 import { Link } from "react-router-dom";
+import ContestsList from "../components/ContestsList";
 
 export default function Home(props) {
     return (
@@ -11,10 +11,7 @@ export default function Home(props) {
             <h1 className="text-3xl mt-5">Contests</h1>
             
             <div className="mt-5 flex flex-col gap-5">
-                <ContestListing contestName="Test" contestOwner="tim" contestID={1} />
-                <ContestListing contestName="Test" contestOwner="tim" contestID={2}/>
-                <ContestListing contestName="Test" contestOwner="tim" contestID={3}/>
-                <ContestListing contestName="Test" contestOwner="tim" contestID={4}/>
+                <ContestsList/>
             </div>
         </div>
     );
