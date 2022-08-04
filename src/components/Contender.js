@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useParams } from "react-router-dom";
+const axios = require("axios").default;
 
 export function PointButton(props) {
     return (
@@ -8,15 +10,27 @@ export function PointButton(props) {
 
 
 
-export default function Contender({ username }) {
-    const [points, setPoints] = useState(0);
+export default function Contender({ username, points }) {
+    const contestID = useParams().contestID;
+    const [updatedPoints, setPoints] = useState(points);
 
+    function updatePoints(amount) {
+        axios.post(action, 
+            {
+                contenderName: username,
+                contestID: contestID,
+                points: amount
+            });
+    }
+    const action = "http://localhost:8000/contests/update_points";
     function addPoints(amount) {
-        setPoints(points + amount);
+        setPoints(updatedPoints + amount);
+        updatePoints(amount);
     }
 
     function subtractPoints(amount) {
-        setPoints(points - amount);
+        setPoints(updatedPoints - amount);
+        updatePoints(-amount);
     }
 
     return (
@@ -27,7 +41,7 @@ export default function Contender({ username }) {
                 <PointButton onClick={ () => addPoints(5) }>+</PointButton>
             </div>
 
-            <p className="text-xl mt-2">Points: { points }</p>
+            <p className="text-xl mt-2">Points: { updatedPoints }</p>
         </div>
     );
 }
