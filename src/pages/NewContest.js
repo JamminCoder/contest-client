@@ -18,7 +18,7 @@ export default function NewContest(props) {
         const pointType = document.querySelector("#pointType").value;
 
         const data = {name: name, pointType: pointType};
-        const headers = {headers: { ...authHeader() } };
+        const headers = { headers: { ...authHeader() } };
         
         axios.post(action, data, headers)
             .then(res => {

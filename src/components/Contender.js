@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import { authHeader } from "../auth";
 const axios = require("axios").default;
 
 export function PointButton(props) {
@@ -15,12 +16,15 @@ export default function Contender({ username, points, pointType }) {
     const [updatedPoints, setPoints] = useState(points);
 
     function updatePoints(amount) {
-        axios.post(action, 
-            {
-                contenderName: username,
-                contestID: contestID,
-                points: amount
-            });
+        const data = {
+            contenderName: username,
+            contestID: contestID,
+            points: amount
+        };
+
+        axios.post(action, data, {headers: { ...authHeader() }}).then(res => {
+            console.log(res.data);
+        });
     }
     const action = "http://localhost:8000/contests/update_points";
     function addPoints(amount) {
