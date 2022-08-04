@@ -19,8 +19,8 @@ root.render(
       <Navbar />
       <Routes>
         <Route path='' element={ <Home/> } />
-        <Route path='/register' element={ <div className='grid place-items-center h-[90vh] px-2'><Register/></div> }/>
-        <Route path='/login' element={ <div className='grid place-items-center h-[90vh] px-2'><Login/></div> }/>
+        <Route path='/register' element={ <Register/> }/>
+        <Route path='/login' element={ <Login/> }/>
         <Route path='/contests/new' element={ <NewContest/> }/>
         <Route path='/contests/:contestID' element={ <Contest/> }/>
       </Routes>
