@@ -10,6 +10,7 @@ import Home from './pages/Home';
 import Navbar from './components/Navbar';
 import Contest from "./pages/Contest";
 import NewContest from "./pages/NewContest";
+import NewContender from "./pages/NewContender";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -23,6 +24,7 @@ root.render(
         <Route path='/login' element={ <Login/> }/>
         <Route path='/contests/new' element={ <NewContest/> }/>
         <Route path='/contests/:contestID' element={ <Contest/> }/>
+        <Route path="/contests/:contestID/new_contender/" element={ <NewContender/> }/>
       </Routes>
     </HashRouter>
     
