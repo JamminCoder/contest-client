@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Contender from "../components/Contender";
-import IfAuth from "../components/IfAuth";
+import { isAuthorized } from "../auth";
 const axios = require("axios").default;
 
 export default function Contest(props) {
@@ -19,14 +19,20 @@ export default function Contest(props) {
     return (
         <div className="Contest flex gap-5 items-center flex-col">
             <h1 className="text-5xl m-5 text-center">{ contest.contestName }</h1>
-            <IfAuth>
-                <Link className="text-blue-500"  to={`/contests/${ contest.contestID }/new_contender`}>New Contender</Link>
-            </IfAuth>
+  
+            { 
+                isAuthorized() && contest.contestManager === localStorage.getItem("username") 
+                ? <Link className="text-blue-500" to={`/contests/${ contest.contestID }/new_contender`}>New Contender</Link>
+                : ""
+            } 
+
 
             <div className="Contenders w-[100%] flex gap-5 items-center flex-col">
-                { contest.contenders ? contest.contenders.map(contender => {
-                    return <Contender key={ contender.contender } username={ contender.contender } points={ contender.points } pointType={ contest.pointType }/>
-                }): "No contenders" }
+                { 
+                    contest.contenders 
+                    ? contest.contenders.map(contender => {return <Contender key={ contender.contender } username={ contender.contender } points={ contender.points } pointType={ contest.pointType }/>})
+                    : "No contenders" 
+                }
             </div>
 
             <h3 className="text-3xl m-5 text-center">Contest Manager: { contest.contestManager }</h3>

@@ -1,20 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams, Navigate } from "react-router-dom";
 import CenterPage from "../components/CenterPage";
 import Form from "../components/Form";
-import { authHeader, isAuthorized } from "../auth";
+import { authHeader, getVerifiedUsername, isAuthorized } from "../auth";
 const axios = require("axios").default;
 
 
 export default function NewContender(props) {
     const [message, setMessage] = useState({color: "green", text: ""});
+    const [username, setUsername] = useState(null);
     const contestID = useParams().contestID;
     const navigate = useNavigate();
     const action = props.action || "http://localhost:8000/contests/new_contender";
 
+    
+    
+    useEffect(() => {
+        getVerifiedUsername(setUsername);
+        console.log(username);
+    })
+
     if (!isAuthorized()) {
         return <Navigate to="/login"/>
     }
+
+    
 
     function onSubmit(e) {
         e.preventDefault();
