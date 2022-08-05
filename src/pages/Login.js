@@ -25,6 +25,7 @@ export default function Login(props) {
                 // Server returned a JWT, that means the login was successful.
                 setMessage({ color: "green", text: "Logging you in..." });
                 localStorage.setItem("jwt", res.data.jwt);
+                localStorage.setItem("username", username);
                 navigate("/");
                 window.location.reload();
                 

@@ -1,8 +1,8 @@
 import Form from '../components/Form';
 import { useState } from "react";
-import { authHeader } from "../auth";
+import { authHeader, isAuthorized } from "../auth";
 import CenterPage from '../components/CenterPage';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 const axios = require("axios").default;
 
 
@@ -30,6 +30,10 @@ export default function NewContest(props) {
                     setMessage(res.data);
                 }
             });
+    }
+
+    if (!isAuthorized()) {
+        return <Navigate to="/login" />
     }
 
     return (

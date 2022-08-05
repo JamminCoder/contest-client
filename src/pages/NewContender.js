@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useNavigate, Link, useParams } from "react-router-dom";
+import { useNavigate, useParams, Navigate } from "react-router-dom";
 import CenterPage from "../components/CenterPage";
 import Form from "../components/Form";
-import { authHeader } from "../auth";
+import { authHeader, isAuthorized } from "../auth";
 const axios = require("axios").default;
 
 
@@ -11,6 +11,10 @@ export default function NewContender(props) {
     const contestID = useParams().contestID;
     const navigate = useNavigate();
     const action = props.action || "http://localhost:8000/contests/new_contender";
+
+    if (!isAuthorized()) {
+        return <Navigate to="/login"/>
+    }
 
     function onSubmit(e) {
         e.preventDefault();

@@ -23,6 +23,7 @@ export default function Register(props) {
                 if (res.data.jwt) {
                     setMessage({ color: "green", text: "Creating your account :)" });
                     localStorage.setItem("jwt", res.data.jwt);
+                    localStorage.setItem("username", username);
                     navigate('/');
                     window.location.reload();
                     
