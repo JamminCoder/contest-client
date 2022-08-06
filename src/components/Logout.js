@@ -6,6 +6,7 @@ export default function Logout(props) {
             onClick={props.onClick || function(e) {
                 e.preventDefault();
                 localStorage.removeItem("jwt");
+                localStorage.removeItem("username");
                 window.location.reload();
             }}
         >
