@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Form from '../components/Form';
 import CenterPage from "../components/CenterPage";
+import { REGISTER_URL } from "../apiConfig";
 const axios = require('axios').default;
 
 
@@ -9,7 +10,7 @@ const axios = require('axios').default;
 export default function Register(props) {
     const [message, setMessage] = useState({ color: null, text: "" });
     const navigate = useNavigate();
-    const action = props.action || "http://localhost:8000/register";
+    const action = props.action || REGISTER_URL;
 
     function onSubmit(e) {
         e.preventDefault();

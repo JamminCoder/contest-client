@@ -3,6 +3,8 @@ import { useNavigate, useParams, Navigate, useLocation } from "react-router-dom"
 import CenterPage from "../components/CenterPage";
 import Form from "../components/Form";
 import { authHeader, getVerifiedUsername, isAuthorized } from "../auth";
+import { newContenderURL } from "../apiConfig";
+
 const axios = require("axios").default;
 
 
@@ -12,7 +14,7 @@ export default function NewContender(props) {
     const contestID = useParams().contestID;
     const location = useLocation();
     const navigate = useNavigate();
-    const action = props.action || `http://localhost:8000${ location.pathname }`;
+    const action = props.action || newContenderURL(contestID);
 
     
     useEffect(() => {

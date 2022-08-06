@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { authHeader, userIsContestManager } from "../auth";
 import If from "./If";
+import { UPDATE_POINTS_URL } from "../apiConfig";
 const axios = require("axios").default;
 
 export function PointButton(props) {
@@ -14,6 +15,7 @@ export default function Contender({ contender, contest }) {
     const contestID = contest.contestID;
     const [updatedPoints, setPoints] = useState(contender.points);
 
+    
     function updatePoints(amount) {
         const data = {
             contenderName: contender.name,
@@ -21,11 +23,11 @@ export default function Contender({ contender, contest }) {
             points: amount
         };
 
-        axios.post(action, data, {headers: { ...authHeader() }}).then(res => {
+        axios.post(UPDATE_POINTS_URL, data, {headers: { ...authHeader() }}).then(res => {
             console.log(res.data);
         });
     }
-    const action = "http://localhost:8000/contests/update_points";
+    
     function addPoints(amount) {
         setPoints(updatedPoints + amount);
         updatePoints(amount);

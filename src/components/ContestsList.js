@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import ContestListing from "./ContestListing";
+import { CONTESTS_LIST_URL } from "../apiConfig";
 
 const axios = require('axios').default;
 
@@ -8,7 +9,7 @@ export default function ContestsList(props) {
 
     useEffect(() => {
 
-        axios.get("http://localhost:8000/contests/list")
+        axios.get(CONTESTS_LIST_URL)
             .then(res => setContests(res.data.contests));
 
     }, [setContests]);

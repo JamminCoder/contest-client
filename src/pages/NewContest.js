@@ -3,12 +3,13 @@ import { useState } from "react";
 import { authHeader, isAuthorized } from "../auth";
 import CenterPage from '../components/CenterPage';
 import { useNavigate, Navigate } from "react-router-dom";
+import { CONTESTS_NEW_URL } from "../apiConfig";
 const axios = require("axios").default;
 
 
 export default function NewContest(props) {
     const [message, setMessage] = useState(null);
-    const action = props.action || "http://localhost:8000/contests/new";
+    const action = props.action || CONTESTS_NEW_URL;
     const navigate = useNavigate();
 
     function onSubmit(e) {

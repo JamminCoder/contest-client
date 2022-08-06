@@ -1,3 +1,5 @@
+import { GET_USER_URL } from "./apiConfig";
+
 const axios = require("axios").default;
 
 export function isAuthorized() {
@@ -12,7 +14,7 @@ export function userIsContestManager(managerName) {
 }
 
 export async function getVerifiedUsername(callback) {
-    const res = await axios.get("http://localhost:8000/user", { headers: {...authHeader()} });
+    const res = await axios.get(GET_USER_URL, { headers: {...authHeader()} });
     const username = res.data;
     callback(username);
 }
