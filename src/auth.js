@@ -6,6 +6,11 @@ export function isAuthorized() {
     return false;
 }
 
+export function userIsContestManager(managerName) {
+    if (localStorage.getItem("username") === managerName) return true;
+    return false;
+}
+
 export async function getVerifiedUsername(callback) {
     const res = await axios.get("http://localhost:8000/user", { headers: {...authHeader()} });
     const username = res.data;

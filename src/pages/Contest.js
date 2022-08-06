@@ -37,7 +37,7 @@ export default function Contest(props) {
             <div className="Contenders w-[100%] flex gap-5 items-center flex-col">
                 { 
                     contenders 
-                    ? contenders.map(c => {return <Contender key={ c.name } username={ c.name } points={ c.points } pointType={ contest.pointType }/>})
+                    ? contenders.map(c => {return <Contender key={ c.name } contender={ c } contest={ contest } />})
                     : "No contenders" 
                 }
             </div>
