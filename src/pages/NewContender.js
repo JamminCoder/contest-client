@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams, Navigate, useLocation } from "react-router-dom";
+import { useNavigate, useParams, Navigate } from "react-router-dom";
 import CenterPage from "../components/CenterPage";
 import Form from "../components/Form";
 import { authHeader, getVerifiedUsername, isAuthorized } from "../auth";
@@ -12,7 +12,6 @@ export default function NewContender(props) {
     const [message, setMessage] = useState({color: "green", text: ""});
     const [username, setUsername] = useState(null);
     const contestID = useParams().contestID;
-    const location = useLocation();
     const navigate = useNavigate();
     const action = props.action || newContenderURL(contestID);
 
@@ -42,8 +41,7 @@ export default function NewContender(props) {
         axios.post(action, data, {headers: { ...authHeader() }})
             .then(res => {
             if (res.data.ok) {
-                navigate("/");
-                window.location.reload();
+                navigate(-1);
                 
             } else {
                 setMessage({ color: "red", text: res.data });
