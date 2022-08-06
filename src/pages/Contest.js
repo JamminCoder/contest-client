@@ -1,20 +1,27 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import Contender from "../components/Contender";
 import { isAuthorized } from "../auth";
 const axios = require("axios").default;
 
 export default function Contest(props) {
     const [contest, setContest] = useState({});
+    const [contenders, setContenders] = useState(null);
+    const location = useLocation();
     const contestID = useParams().contestID;
 
     useEffect(() => {
-        const action = "http://localhost:8000/contests/show?contestID=" + contestID;
-        
-        axios.get(action).then( res => {
+        const contestAction = `http://localhost:8000${location.pathname}/show`;
+        const contenderAction = `http://localhost:8000${location.pathname}/contenders`;
+        console.log(contenderAction);
+        axios.get(contestAction).then( res => {
             setContest(res.data.contest);
         });
-    }, [setContest]);
+
+        axios.get(contenderAction, { contestID: contestID }).then( res => {
+            setContenders(res.data.contenders);
+        });
+    }, [setContest, setContenders]);
 
     return (
         <div className="Contest flex gap-5 items-center flex-col">
@@ -29,8 +36,8 @@ export default function Contest(props) {
 
             <div className="Contenders w-[100%] flex gap-5 items-center flex-col">
                 { 
-                    contest.contenders 
-                    ? contest.contenders.map(contender => {return <Contender key={ contender.contender } username={ contender.contender } points={ contender.points } pointType={ contest.pointType }/>})
+                    contenders 
+                    ? contenders.map(c => {return <Contender key={ c.name } username={ c.name } points={ c.points } pointType={ contest.pointType }/>})
                     : "No contenders" 
                 }
             </div>

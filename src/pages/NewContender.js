@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams, Navigate } from "react-router-dom";
+import { useNavigate, useParams, Navigate, useLocation } from "react-router-dom";
 import CenterPage from "../components/CenterPage";
 import Form from "../components/Form";
 import { authHeader, getVerifiedUsername, isAuthorized } from "../auth";
@@ -10,10 +10,10 @@ export default function NewContender(props) {
     const [message, setMessage] = useState({color: "green", text: ""});
     const [username, setUsername] = useState(null);
     const contestID = useParams().contestID;
+    const location = useLocation();
     const navigate = useNavigate();
-    const action = props.action || "http://localhost:8000/contests/new_contender";
+    const action = props.action || `http://localhost:8000${ location.pathname }`;
 
-    
     
     useEffect(() => {
         getVerifiedUsername(setUsername);
