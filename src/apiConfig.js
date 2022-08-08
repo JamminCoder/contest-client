@@ -6,6 +6,7 @@ export const CONTESTS_NEW_URL = API_URL + "/contests/new";
 export const showContestURL = contestID => API_URL + `/contests/${contestID}/show`;
 
 export const newContenderURL = contestID => API_URL + `/contests/${contestID}/new_contender`;
+export const deleteContenderURL = (contestID, contenderName) => API_URL + `/contests/${contestID}/delete_contender/${contenderName}`;
 export const getContendersURL = contestID => API_URL + `/contests/${contestID}/contenders`;
 
 export const UPDATE_POINTS_URL = API_URL + "/contests/update_points"
