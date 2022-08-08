@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { authHeader, userIsContestManager } from "../auth";
 import If from "./If";
@@ -17,7 +17,9 @@ export default function Contender({ contender, contest }) {
     const [hideDelete, setHideDelete] = useState(true);
     const [deleteMessage, setDeleteMessage] = useState("Remove Contender");
     const [isDeleted, setIsDeleted] = useState(false);
+    const [pointQty, setPointQty] = useState(5);
     
+
     function updatePoints(amount) {
         const data = {
             contenderName: contender.name,
@@ -63,32 +65,45 @@ export default function Contender({ contender, contest }) {
         });
     }
 
+    function handlePointQty() {
+        setPointQty(parseInt(document.querySelector("#point_qty").value));
+    }
+
+    useEffect(() => {
+        handlePointQty();
+    })
 
     if (isDeleted) return;
     return (
-        <div className="Contender grid place-items-center mb-5 w-[100%] max-w-[30rem] p-2 border border-gray-300 rounded-md">
+        <div className="Contender grid gap-2 place-items-center mb-5 w-[100%] max-w-[30rem] p-2 border border-gray-300 rounded-md">
+            <div className="mx-5">
+                <label htmlFor="point_qty">Add/Subtract Amount</label>
+                <input onInput={() => handlePointQty() } className="w-10 ml-3 p-1" id="point_qty" type="number" defaultValue="5"/>
+            </div>
+
             <div className="flex gap-5 justify-center">
-                
                 <If condition={ userIsContestManager(contest.contestManager) }>
-                    <PointButton onClick={() => subtractPoints(5) } >-</PointButton>
+                    <PointButton onClick={() => subtractPoints(pointQty) } >-</PointButton>
                 </If>
                 
                 <p className="font-bold text-2xl text-center [word-break:break-word] flex items-center">{ contender.name }</p>
                 
                 <If condition={ userIsContestManager(contest.contestManager) }>
-                    <PointButton onClick={ () => addPoints(5) }>+</PointButton>
+                    <PointButton onClick={ () => addPoints(pointQty) }>+</PointButton>
                 </If>
             </div>
 
-            <p className="text-xl mt-2">{ contest.pointType }: { updatedPoints }</p>
+            <p className="text-xl m-2">{ contest.pointType }: { updatedPoints }</p>
             
             <If condition={ userIsContestManager(contest.contestManager) }>
-                <a onClick={ handleDeleteClick } className="my-1 p-1 border cursor-pointer text-blue-500">{ deleteMessage }</a>
-                
-                <If condition={ !hideDelete }>
-                    <p className="mt-2">Are you sure you want to delete "{ contender.name }"?</p>
-                    <a onClick={ deleteContender } className="text-red-500 p-1 border cursor-pointer">DELETE</a>
-                </If>
+                <div>
+                    <a onClick={ handleDeleteClick } className="my-1 p-1 border cursor-pointer text-blue-500">{ deleteMessage }</a>
+                    
+                    <If condition={ !hideDelete }>
+                        <p className="mt-2">Are you sure you want to delete "{ contender.name }"?</p>
+                        <a onClick={ deleteContender } className="text-red-500 p-1 border cursor-pointer">DELETE</a>
+                    </If>
+                </div>
             </If>
         </div>
     );

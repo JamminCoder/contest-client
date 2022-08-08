@@ -65,12 +65,8 @@ export default function Contest(props) {
                     </If>
                 </div>
                 
+                <Link className="text-blue-500 p-2 border hover:bg-white transition cursor-pointer" to={`/contests/${ contest.contestID }/new_contender`}>New Contender</Link>
             </If>
-            { 
-                isAuthorized() && contest.contestManager === localStorage.getItem("username") 
-                ? <Link className="text-blue-500 p-2 border hover:bg-white transition cursor-pointer" to={`/contests/${ contest.contestID }/new_contender`}>New Contender</Link>
-                : ""
-            } 
 
 
             <div className="Contenders w-[100%] flex gap-5 items-center flex-col">
