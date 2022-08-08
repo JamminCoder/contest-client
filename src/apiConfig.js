@@ -3,6 +3,7 @@ export const API_URL = `http://${window.location.hostname}:8000`;
 export const GET_USER_URL = API_URL + "/user";
 export const CONTESTS_LIST_URL = API_URL + "/contests/list";
 export const CONTESTS_NEW_URL = API_URL + "/contests/new";
+export const deleteContestURL = contestID => API_URL + `/contests/${contestID}/delete`;
 export const showContestURL = contestID => API_URL + `/contests/${contestID}/show`;
 
 export const newContenderURL = contestID => API_URL + `/contests/${contestID}/new_contender`;
