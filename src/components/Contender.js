@@ -59,9 +59,8 @@ export default function Contender({ contender, contest }) {
         console.log({ headers: { ...authHeader() } });
 
         axios.delete(url, { headers: { ...authHeader() } }).then(res => {
-            console.log(res.data);
             setIsDeleted(true);
-            console.log("deleting");
+            window.location.reload();
         });
     }
 
@@ -71,7 +70,7 @@ export default function Contender({ contender, contest }) {
 
     useEffect(() => {
         handlePointQty();
-    })
+    });
 
     if (isDeleted) return;
     return (
@@ -96,7 +95,7 @@ export default function Contender({ contender, contest }) {
             <p className="text-xl m-2">{ contest.pointType }: { updatedPoints }</p>
             
             <If condition={ userIsContestManager(contest.contestManager) }>
-                <div>
+                <div className="flex flex-col items-center">
                     <a onClick={ handleDeleteClick } className="my-1 p-1 border cursor-pointer text-blue-500">{ deleteMessage }</a>
                     
                     <If condition={ !hideDelete }>
