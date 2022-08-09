@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
 import { authHeader, userIsContestManager } from "../auth";
 import If from "./If";
 import { UPDATE_POINTS_URL, deleteContenderURL } from "../apiConfig";
