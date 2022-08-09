@@ -76,7 +76,7 @@ export default function Contender({ contender, contest }) {
         <div className="Contender grid gap-2 place-items-center mb-5 w-[100%] max-w-[30rem] p-2 border border-gray-300 rounded-md">
             <div className="mx-5">
                 <label htmlFor="point_qty">Add/Subtract Amount</label>
-                <input onInput={() => handlePointQty() } className="w-10 ml-3 p-1" id={`point_qty_${contender.name}`} type="number" defaultValue={ pointQty }/>
+                <input onInput={() => handlePointQty() } className="w-10 ml-3 p-1" id={`point_qty_${contender.name}`} type="number" min="1" defaultValue={ pointQty }/>
             </div>
 
             <div className="flex gap-5 justify-center">
