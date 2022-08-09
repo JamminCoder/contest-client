@@ -66,7 +66,7 @@ export default function Contender({ contender, contest }) {
     }
 
     function handlePointQty() {
-        setPointQty(parseInt(document.querySelector("#point_qty").value));
+        setPointQty(parseInt(document.querySelector(`#point_qty_${contender.name}`).value));
     }
 
     useEffect(() => {
@@ -78,7 +78,7 @@ export default function Contender({ contender, contest }) {
         <div className="Contender grid gap-2 place-items-center mb-5 w-[100%] max-w-[30rem] p-2 border border-gray-300 rounded-md">
             <div className="mx-5">
                 <label htmlFor="point_qty">Add/Subtract Amount</label>
-                <input onInput={() => handlePointQty() } className="w-10 ml-3 p-1" id="point_qty" type="number" defaultValue="5"/>
+                <input onInput={() => handlePointQty() } className="w-10 ml-3 p-1" id={`point_qty_${contender.name}`} type="number" defaultValue="5"/>
             </div>
 
             <div className="flex gap-5 justify-center">
